@@ -19,10 +19,19 @@ def clean_prices(prices):
             }
     return return_value
 
+def price_checker():
+    prices = get_prices()
+    while True:
+        new_prices = get_prices()
+        for price in new_prices:
+            if prices[price] != new_prices[price]:
+                print("{} price has changed ({} {})".format(price, new_prices[price]['bid'], new_prices[price]['ask']))
+            time.sleep(1)
+
 def run():
     mt5.initialize()
     result = get_prices()
-    print(json.dumps(result, indent =2))
+    price_checker()
     
 if __name__ == "__main__":
     run()
