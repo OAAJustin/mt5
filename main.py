@@ -1,4 +1,6 @@
 import MetaTrader5 as mt5
+import json
+import time
 
 assets_to_use = ["EURUSD", "GBPUSD", "USDCAD", "AUDUSD", "USDJPY"]
 
@@ -20,7 +22,7 @@ def clean_prices(prices):
 def run():
     mt5.initialize()
     result = get_prices()
-    print(result)
+    print(json.dumps(result, indent =2))
     
 if __name__ == "__main__":
     run()
