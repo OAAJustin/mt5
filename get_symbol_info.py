@@ -16,7 +16,7 @@ def get_symbol_info(symbol):
     
 if __name__ == '__main__':
     # Input the symbol info to get
-    symbol = input("Choose a symbol: \n").upper()
+    symbol = input("Choose a symbol: ").upper()
     
     # Display Header
     print(f'Symbol info for {symbol}.\n')
