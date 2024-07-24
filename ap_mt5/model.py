@@ -1,14 +1,19 @@
+#region Import Dependencies
 from pydantic.dataclasses import dataclass
 import decimal
 import datetime
+#endregion Import Dependencies
 
+#region Price dataclass
 @dataclass
 class Price:
     asset:str
     bid: decimal.Decimal
     ask: decimal.Decimal
     tick_value: decimal.Decimal
-    
+#endregion Price dataclass
+
+#region Account dataclass
 @dataclass
 class Account:
     account_number: int
@@ -18,7 +23,9 @@ class Account:
     leverage: int
     margin: decimal.Decimal
     currency: str
+#endregion Account dataclass
 
+#region Trade dataclass
 @dataclass
 class Trade:
     ticket: int
@@ -37,4 +44,5 @@ class Trade:
     volume: decimal.Decimal
     comment: str
     magic: int
-    
+#endregion Trade dataclass
+

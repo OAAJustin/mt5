@@ -1,7 +1,10 @@
+#region Import dependencies
 import asyncio
 import concurrent.futures
 import MetaTrader5 as mt5
+#endregion Import dependencies
 
+#region TradeClient class
 class TradeClient:
     def __init__(self, loop = None):
         self.loop = loop or asyncio.get_running_loop()
@@ -33,3 +36,4 @@ class TradeClient:
     
     async def get_history_orders(self, ticket):
         return await self.loop.run_in_executor(self.pool, lambda:mt5.history_orders_get(position = ticket))
+#endregion TradeClient class

@@ -1,4 +1,4 @@
-# Import Dependencies
+#region Import Dependencies
 import MetaTrader5 as mt5
 from client import TradeClient
 from tools_pips import digits
@@ -8,6 +8,7 @@ import tools
 import asyncio
 import json
 import time
+#endregion Import Dependencies
 
 #region Read the json config file
 with open('config.json', 'r') as config_file:
@@ -33,7 +34,7 @@ def clean_prices(prices):
     return return_value
 #endregion Get the symbol information of the name, ask price and bid price
 
-# Clean the account information
+#region Clean the account information
 def clean_account(account):
     return {
         "account_number": account.login,
@@ -44,8 +45,9 @@ def clean_account(account):
         "currency": account.currency,
         "leverage": account.leverage
     }
+#endregion Clean the account information
 
-# Price check the symbol 
+#region Price check the symbol 
 async def price_checker(client):
     prices = await get_prices(client)
     while True:
@@ -54,21 +56,24 @@ async def price_checker(client):
             if prices[price] != new_prices[price]:
                 print("{} price has changed ({} {})".format(price, new_prices[price]['bid'], new_prices[price]['ask']))
             prices[price] = new_prices[price]
+#endregion Price check the symbol
 
-# Get account information          
+#region Get account information          
 async def account(client):
     account = await client.get_account()
     # print(json.dumps(clean_account(account), indent = 2))
     return clean_account(account)
+#endregion Get account information
 
-# Open trades
+#region Open trades
 async def open_trade(client):
     for asset in config["assets_to_use"]:
         for i in range(10):
             await open_buy(client, asset, 10, 10)
             await open_sell(client, asset, 10, 10)
-        
-# Close trades
+#endregion Open trades
+ 
+#region Close trades
 async def close_all(client):
     trades = await client.get_positions()
     for trade in trades:
@@ -76,13 +81,15 @@ async def close_all(client):
         print(f"We are about to close trade{t.ticket}")
         await close_trade(client, t.ticket)
         print(f"We have closed trade {t.ticket}")
-    
-# Show open trades
+#endregion Close trades
+
+#region Show open trades
 async def show_open_trades(client):
     trades = await client.get_positions()
     print(trades)
+#endregion
 
-## MAIN
+#region MAIN
 async def main():
     mt5.initialize() # initialize MT5
     client = TradeClient() # Trade Client
@@ -90,7 +97,7 @@ async def main():
     time.sleep(3)
     await close_all(client)
     print("Order Send Successful!")
-    
+
 if __name__ == "__main__":
     asyncio.run(main()) # Display the prices of the symbol
-    
+#endregion MAIN 

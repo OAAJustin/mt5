@@ -1,9 +1,12 @@
+#region Import dependencies
 from tools_pips import pip_value, digits
 import MetaTrader5 as mt5
 from decimal import Decimal
 from model import Trade
 import datetime
+#endregion Import dependencies
 
+#region Unpack open trade function
 def unpack_open_trade(trade):
     tp_pips, sl_pips, pnl_pips = 0, 0, 0
     pip = pip_value(trade.symbol)
@@ -49,7 +52,9 @@ def unpack_open_trade(trade):
     )
     
     return open_trade
+#endregion Unpack open trade function
 
+#region Unpack closed trade function
 def unpack_closed_trade(deals, history):
     entry = history[0]
     exit = history[1]
@@ -112,3 +117,4 @@ def unpack_closed_trade(deals, history):
     )
     
     return closed_trade
+#endregion Unpack closed trade function

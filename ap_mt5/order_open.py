@@ -1,7 +1,10 @@
+#region Import Dependencies
 from tools_pips import pip_value
 import decimal
 import MetaTrader5 as mt5
+#endregion Import Dependencies
 
+#region Open Buy Function
 async def open_buy(client, symbol, tp_pips, sl_pips):
     symbol_info = await client.get_symbol(symbol)
     tick_value = symbol_info.trade_tick_value
@@ -24,7 +27,9 @@ async def open_buy(client, symbol, tp_pips, sl_pips):
     }
     
     return await client.order_send(request)
-    
+#endregion Open Buy Function
+
+#region Open Sell Function
 async def open_sell(client, symbol, tp_pips, sl_pips):
     symbol_info = await client.get_symbol(symbol)
     tick_value = symbol_info.trade_tick_value
@@ -47,3 +52,4 @@ async def open_sell(client, symbol, tp_pips, sl_pips):
     }
     
     return await client.order_send(request)
+#endregion Open Sell Function 
