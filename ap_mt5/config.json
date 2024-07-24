@@ -1,0 +1,7 @@
+{
+"assets_to_use": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY"
+  ]
+}

@@ -1,4 +1,4 @@
-from config import pip_value
+from tools_pips import pip_value
 import decimal
 import MetaTrader5 as mt5
 
@@ -46,4 +46,4 @@ async def open_sell(client, symbol, tp_pips, sl_pips):
         "comment": "Test Trade"
     }
     
-    await client.order_send(request)
+    return await client.order_send(request)

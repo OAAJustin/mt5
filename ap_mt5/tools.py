@@ -1,4 +1,4 @@
-from config import pip_value, digits
+from tools_pips import pip_value, digits
 import MetaTrader5 as mt5
 from decimal import Decimal
 from model import Trade
